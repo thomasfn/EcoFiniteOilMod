@@ -42,8 +42,4 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;E:\Development\VS2019 Projects\EcoCivicsImportExportMod\EcoServerPC2\Mods&quot;" />
-  </Target>
-
 </Project>
