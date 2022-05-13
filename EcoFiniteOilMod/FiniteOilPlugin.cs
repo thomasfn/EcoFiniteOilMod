@@ -91,6 +91,7 @@ namespace Eco.Mods.FiniteOil
         }
 
         public string GetDisplayText() => string.Empty;
+        public string GetCategory() => Localizer.DoStr("Config");
         public string GetStatus() => string.Empty;
         public override string ToString() => Localizer.DoStr("FiniteOil");
 
