@@ -15,7 +15,7 @@ namespace Eco.Mods.FiniteOil
         public static void Rate(User user)
         {
             var rate = FiniteOilPlugin.Obj.Config.ExtractRate;
-            user.MsgLoc($"Oil decay is currently set to {rate:%}% of oilfield density per petroleum extracted.");
+            user.MsgLoc($"Oil decay is currently set to {rate:N} ({rate * 100.0f:N}%) of oilfield density per petroleum extracted.");
         }
     }
 }
