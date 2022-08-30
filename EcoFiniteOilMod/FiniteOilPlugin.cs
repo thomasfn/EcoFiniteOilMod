@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Eco.Mods.FiniteOil
 {
@@ -10,11 +11,12 @@ namespace Eco.Mods.FiniteOil
     using Shared.Utils;
     using Shared.Math;
 
-    using Gameplay.GameActions;
-
     using Simulation.WorldLayers;
-    using Eco.Gameplay.Objects;
-    using System.Collections.Generic;
+
+    using Gameplay.GameActions;
+    using Gameplay.Objects;
+    using Gameplay.Aliases;
+    using Gameplay.Property;
 
     [Localized]
     public class FiniteOilConfig
@@ -90,19 +92,18 @@ namespace Eco.Mods.FiniteOil
             this.SaveConfig();
         }
 
-        public string GetDisplayText() => string.Empty;
         public string GetCategory() => Localizer.DoStr("Config");
         public string GetStatus() => string.Empty;
         public override string ToString() => Localizer.DoStr("FiniteOil");
 
-        public LazyResult ShouldOverrideAuth(GameAction action)
+        public LazyResult ShouldOverrideAuth(IAlias alias, IOwned property, GameAction action)
             => LazyResult.FailedNoMessage;
 
         public void ActionPerformed(GameAction action)
         {
-            if (!(action is ItemCraftedAction itemCraftedAction)) { return; }
+            if (action is not ItemCraftedAction itemCraftedAction) { return; }
             if (itemCraftedAction.WorldObject == null) { return; }
-            if (!(itemCraftedAction.WorldObject is WorldObject worldObject)) { return; }
+            if (itemCraftedAction.WorldObject is not WorldObject worldObject) { return; }
             if (worldObject.GetType().Name != "PumpJackObject") { return; }
             var layer = WorldLayerManager.Obj.GetLayer(LayerNames.Oilfield);
             var layerCoord = layer.WorldPosToLayerPos(new Vector2i(itemCraftedAction.ActionLocation.X, itemCraftedAction.ActionLocation.Z));
