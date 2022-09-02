@@ -9,14 +9,14 @@ jobs:
     name: Build Mod
     runs-on: ubuntu-latest
     env:
-      MODKIT_VERSION: 0.9.5.0-beta-staging-2293
-      ECO_BRANCH: staging
+      MODKIT_VERSION: 0.9.6.1-beta
+      ECO_BRANCH: release
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core 5.0
+    - name: Setup .NET Core 6.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '5.0.x'
+        dotnet-version: '6.0.x'
     - name: Fetch dependencies
       run: dotnet restore ./EcoFiniteOilMod/EcoFiniteOilMod.csproj
       env:
@@ -31,14 +31,14 @@ jobs:
       if: steps.cache-eco-dlls.outputs.cache-hit != 'true'
       run: sh fetch-eco-reference-assemblies.sh
     - name: Build
-      run: dotnet build ./EcoFiniteOilMod/EcoFiniteOilMod.csproj --configuration Release --no-restore
+      run: dotnet build ./EcoFiniteOilMod/EcoFiniteOilMod.csproj --configuration Release --no-restore /p:AssemblyVersion=${{github.event.release.tag_name}}
       env:
         DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
     - name: Upload build artifact
       uses: actions/upload-artifact@v2
       with:
         name: mod-binaries-${{github.event.release.tag_name}}
-        path: EcoFiniteOilMod/bin/Release/net5.0/EcoFiniteOilMod.*
+        path: EcoFiniteOilMod/bin/Release/net6.0/EcoFiniteOilMod.*
   deploy:
     name: Upload Release Assets
     needs:
