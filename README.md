@@ -42,7 +42,7 @@ Note that this isn't entirely accurate as the pumpjacks will slow down as the oi
 
 ### Linux
 
-1. Run `ECO_BRANCH="release" MODKIT_VERSION="0.9.6.0-beta" fetch-eco-reference-assemblies.sh` (change the modkit branch and version as needed)
+1. Run `ECO_BRANCH="release" MODKIT_VERSION="0.9.6.1-beta" fetch-eco-reference-assemblies.sh` (change the modkit branch and version as needed)
 2. Enter the `EcoFiniteOilMod` directory and run:
 `dotnet restore`
 `dotnet build`
