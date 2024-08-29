@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Eco.Mods.FiniteOil
+﻿namespace Eco.Mods.FiniteOil
 {
     using Shared.Localization;
-    using Shared.Utils;
+    using Shared.Logging;
 
     public static class Logger
     {
